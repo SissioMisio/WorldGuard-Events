@@ -1,5 +1,6 @@
-package net.raidstone.wgevents.events;
+package it.mercuriomc.wgevents.events;
 
+import com.sk89q.worldedit.util.Location;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -17,7 +18,7 @@ import java.util.UUID;
  * @version 1.0.0
  * @since 2/24/19
  */
-public class RegionEnteredEvent extends Event implements Cancellable {
+public class RegionLeftEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
     
     private boolean cancelled = false;
@@ -25,19 +26,22 @@ public class RegionEnteredEvent extends Event implements Cancellable {
     private final UUID uuid;
     private final ProtectedRegion region;
     private final String regionName;
+    private final Location fromLocation;
+    private final Location toLocation;
     
     /**
-     * This even is fired whenever a region is entered.
+     * This even is fired whenever a region is left.
      * It may be fired multiple times per tick, if several
-     * regions are entered at the same time.
-     * @param playerUUID The UUID of the player entering the region.
+     * regions are left at the same time.
+     * @param playerUUID The UUID of the player leaving the region.
      * @param region WorldGuard's ProtectedRegion region.
      */
-    public RegionEnteredEvent(UUID playerUUID, @NotNull ProtectedRegion region)
-    {
+    public RegionLeftEvent(UUID playerUUID, @NotNull ProtectedRegion region, Location fromLocation, Location toLocation) {
         this.uuid = playerUUID;
         this.region = region;
         this.regionName = region.getId();
+        this.fromLocation = fromLocation;
+        this.toLocation = toLocation;
     }
     
     @Contract (pure = true)
@@ -59,7 +63,17 @@ public class RegionEnteredEvent extends Event implements Cancellable {
     public Player getPlayer() {
         return Bukkit.getPlayer(uuid);
     }
-    
+
+    @NotNull
+    public Location getFromLocation() {
+        return this.fromLocation;
+    }
+
+    @NotNull
+    public Location getToLocation() {
+        return this.toLocation;
+    }
+
     @NotNull
     public String getRegionName() {
         return regionName;

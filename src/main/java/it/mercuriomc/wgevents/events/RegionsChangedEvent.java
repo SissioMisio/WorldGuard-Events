@@ -1,4 +1,4 @@
-package net.raidstone.wgevents.events;
+package it.mercuriomc.wgevents.events;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Bukkit;
@@ -37,8 +37,7 @@ public class RegionsChangedEvent extends Event implements Cancellable {
      * @param previous Set of WorldGuard's ProtectedRegion the player was in before this event
      * @param current Set of WorldGUard's ProtectedRegion the player is currently in
      */
-    public RegionsChangedEvent(UUID playerUUID, @NotNull Set<ProtectedRegion> previous, @NotNull Set<ProtectedRegion> current)
-    {
+    public RegionsChangedEvent(UUID playerUUID, @NotNull Set<ProtectedRegion> previous, @NotNull Set<ProtectedRegion> current) {
         this.uuid = playerUUID;
         previousRegions.addAll(previous);
         currentRegions.addAll(current);

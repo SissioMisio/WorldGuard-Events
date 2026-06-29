@@ -3,18 +3,18 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.raidstone</groupId>
-    <artifactId>WorldGuardEvents</artifactId>
+    <groupId>it.mercuriomc</groupId>
+    <artifactId>WorldGuardEventsMercurio</artifactId>
     <version>1.18.1</version>
 
-    <name>WorldGuard Events</name>
+    <name>WorldGuard Events MercurioMC</name>
     <description>Plugin that fires events when a player enters or leaves a WorldGuard area.</description>
 
-    <url>https://github.com/Webbeh/WorldGuard-Events</url>
+    <url>https://github.com/SissioMisio/WorldGuard-Events</url>
     <scm>
-        <connection>scm:git:git://github.com/Webbeh/WorldGuard-Events.git</connection>
+        <connection>scm:git:git://github.com/SissioMisio/WorldGuard-Events.git</connection>
         <developerConnection>scm:git:git@github.com:Webbeh/WorldGuard-Events.git</developerConnection>
-        <url>https://github.com/Webbeh/WorldGuard-Events/tree/master</url>
+        <url>https://github.com/SissioMisio/WorldGuard-Events/tree/master</url>
     </scm>
     <distributionManagement>
         <snapshotRepository>
@@ -37,7 +37,7 @@
     </developers>
     <build>
         <defaultGoal>clean package install</defaultGoal>
-        <finalName>WorldGuardEvents-${project.version}</finalName>
+        <finalName>WorldGuardEventsMercurio-${project.version}</finalName>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <resources>
             <resource>

@@ -1,4 +1,4 @@
-package net.raidstone.wgevents;
+package it.mercuriomc.wgevents;
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
@@ -82,8 +82,7 @@ public class WorldGuardEvents extends JavaPlugin implements Listener {
      * @return Set of WorldGuard protected regions that the player is currently in.
      */
     @Nonnull
-    public static Set<ProtectedRegion> getRegions(UUID playerUUID)
-    {
+    public static Set<ProtectedRegion> getRegions(UUID playerUUID) {
         Player player = Bukkit.getPlayer(playerUUID);
         if (player == null || !player.isOnline())
             return Collections.emptySet();
@@ -100,8 +99,7 @@ public class WorldGuardEvents extends JavaPlugin implements Listener {
      * @return Set of Strings with the names of the regions the player is currently in.
      */
     @Nonnull
-    public static Set<String> getRegionsNames(UUID playerUUID)
-    {
+    public static Set<String> getRegionsNames(UUID playerUUID) {
         return getRegions(playerUUID).stream().map(ProtectedRegion::getId).collect(Collectors.toSet());
     }
     
@@ -112,8 +110,7 @@ public class WorldGuardEvents extends JavaPlugin implements Listener {
      * @param regionNames Set of regions to check.
      * @return True if the player is in (all) the named region(s).
      */
-    public static boolean isPlayerInAllRegions(UUID playerUUID, Set<String> regionNames)
-    {
+    public static boolean isPlayerInAllRegions(UUID playerUUID, Set<String> regionNames) {
         Set<String> regions = getRegionsNames(playerUUID);
         if(regionNames.isEmpty()) throw new IllegalArgumentException("You need to check for at least one region !");
         
@@ -127,8 +124,7 @@ public class WorldGuardEvents extends JavaPlugin implements Listener {
      * @param regionNames Set of regions to check.
      * @return True if the player is in (any of) the named region(s).
      */
-    public static boolean isPlayerInAnyRegion(UUID playerUUID, Set<String> regionNames)
-    {
+    public static boolean isPlayerInAnyRegion(UUID playerUUID, Set<String> regionNames) {
         Set<String> regions = getRegionsNames(playerUUID);
         if(regionNames.isEmpty()) throw new IllegalArgumentException("You need to check for at least one region !");
         for(String region : regionNames)
@@ -146,8 +142,7 @@ public class WorldGuardEvents extends JavaPlugin implements Listener {
      * @param regionName List of regions to check.
      * @return True if the player is in (any of) the named region(s).
      */
-    public static boolean isPlayerInAnyRegion(UUID playerUUID, String... regionName)
-    {
+    public static boolean isPlayerInAnyRegion(UUID playerUUID, String... regionName) {
         return isPlayerInAnyRegion(playerUUID, new HashSet<>(Arrays.asList(regionName)));
     }
     
@@ -158,8 +153,7 @@ public class WorldGuardEvents extends JavaPlugin implements Listener {
      * @param regionName List of regions to check.
      * @return True if the player is in (any of) the named region(s).
      */
-    public static boolean isPlayerInAllRegions(UUID playerUUID, String... regionName)
-    {
+    public static boolean isPlayerInAllRegions(UUID playerUUID, String... regionName) {
         return isPlayerInAllRegions(playerUUID, new HashSet<>(Arrays.asList(regionName)));
     }
     

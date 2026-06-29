@@ -1,4 +1,4 @@
-package net.raidstone.wgevents.events;
+package it.mercuriomc.wgevents.events;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.Bukkit;
@@ -34,8 +34,7 @@ public class RegionsLeftEvent extends Event implements Cancellable {
      * @param playerUUID The UUID of the player leaving the regions.
      * @param regions Set of WorldGuard's ProtectedRegion regions.
      */
-	public RegionsLeftEvent(UUID playerUUID, @Nullable Set<ProtectedRegion> regions)
-	{
+	public RegionsLeftEvent(UUID playerUUID, @Nullable Set<ProtectedRegion> regions) {
 		this.uuid = playerUUID;
 		this.regionsNames = new HashSet<>();
 		this.regions = new HashSet<>();

@@ -1,7 +1,7 @@
-name: "WorldGuardEvents"
+name: "WorldGuardEventsMercurio"
 description: Provides other plugins with valuable events concerning WorldGuard regions.
-version: ${project.version}
-api-version: 1.15
-main: net.raidstone.wgevents.WorldGuardEvents
-author: Weby
+version: '${project.version}'
+api-version: '1.21.4'
+main: it.mercuriomc.wgevents.WorldGuardEvents
+author: Weby, SissioMisio
 depend: [WorldGuard]

@@ -1,4 +1,4 @@
-package net.raidstone.wgevents;
+package it.mercuriomc.wgevents;
 
 import com.sk89q.worldedit.util.Location;
 import com.sk89q.worldguard.LocalPlayer;
@@ -7,7 +7,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.session.MoveType;
 import com.sk89q.worldguard.session.Session;
 import com.sk89q.worldguard.session.handler.Handler;
-import net.raidstone.wgevents.events.*;
+import it.mercuriomc.wgevents.events.*;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
@@ -37,8 +37,7 @@ public class Entry extends Handler implements Listener {
     }
     
     @Override
-    public boolean onCrossBoundary(LocalPlayer player, Location from, Location to, ApplicableRegionSet toSet, Set<ProtectedRegion> entered, Set<ProtectedRegion> left, MoveType moveType)
-    {
+    public boolean onCrossBoundary(LocalPlayer player, Location from, Location to, ApplicableRegionSet toSet, Set<ProtectedRegion> entered, Set<ProtectedRegion> left, MoveType moveType) {
         RegionsChangedEvent rce = new RegionsChangedEvent(player.getUniqueId(), left, entered);
         pm.callEvent(rce);
         if(rce.isCancelled()) return false;
@@ -52,14 +51,14 @@ public class Entry extends Handler implements Listener {
         if(rle.isCancelled()) return false;
         
         for(ProtectedRegion r : entered) {
-            RegionEnteredEvent regentered = new RegionEnteredEvent(player.getUniqueId(), r);
+            RegionEnteredEvent regentered = new RegionEnteredEvent(player.getUniqueId(), r, from, to);
             pm.callEvent(regentered);
             if(regentered.isCancelled()) return false;
         }
     
     
         for(ProtectedRegion r : left) {
-            RegionLeftEvent regleft = new RegionLeftEvent(player.getUniqueId(), r);
+            RegionLeftEvent regleft = new RegionLeftEvent(player.getUniqueId(), r, from, to);
             pm.callEvent(regleft);
             if(regleft.isCancelled()) return false;
         }

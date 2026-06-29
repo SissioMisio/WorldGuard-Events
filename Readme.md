@@ -1,10 +1,5 @@
 # WorldGuard Events
 
-## This project is abandoned.
-It has still been tested to work on every version from 1.15 to 1.20.5, and will probably work for the forseeable future, but no update or fix will be made.
-
-You are very welcome to fork it, or to take over the repo if you are serious enough.
-
 ## For server admins
 
 This plugin may be required by some other plugins. If so, simply drop the JAR in the **plugins** folder of your server, reload it, and you're set.
@@ -42,60 +37,55 @@ All of those use the UUID of the player to fetch information about him from Worl
 ## Usage example
 
 ```java
-import net.raidstone.wgevents.WorldGuardEvents;
-import net.raidstone.wgevents.events.RegionEnteredEvent;
-import net.raidstone.wgevents.events.RegionsLeftEvent;
+import it.mercuriomc.wgevents.WorldGuardEvents;
+import events.it.mercuriomc.wgevents.RegionEnteredEvent;
+import events.it.mercuriomc.wgevents.RegionsLeftEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import java.util.Set;
 
 public class TestPlugin extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         Bukkit.getPluginManager().registerEvents(this, this);
-     
+
         // On plugin activation, send a message to players that are located in a jail.
-        for(Player p : Bukkit.getOnlinePlayers())
-        {
-            if(WorldGuardEvents.isPlayerInAnyRegion(p.getUniqueId(), "jail", "cell"))
-            {
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (WorldGuardEvents.isPlayerInAnyRegion(p.getUniqueId(), "jail", "cell")) {
                 p.sendMessage("You are in jail ! Did you do something bad ?");
             }
         }
     }
- 
-   @EventHandler
-   public void onRegionEntered(RegionEnteredEvent event)
-   {
-       Player player = Bukkit.getPlayer(event.getUUID());
-       if (player == null) return;
-     
-       String regionName = event.getRegionName();
-       if(regionName.equalsIgnoreCase("jail"))
-       {
-           player.sendMessage("You are now in jail !");
-       }
-   }
 
-   @EventHandler
-   public void onRegionsLeft(RegionsLeftEvent event)
-   {
-       Player player = Bukkit.getPlayer(event.getUUID());
-       if(player == null) return;
-     
-       Set<String> regionsNames = event.getRegionsNames();
-     
-       if(regionsNames.contains("jail") || regionsNames.contains("cell"))
-       {
-           player.sendMessage("You are in jail, you can't escape !");
-           event.setCancelled(true);
-       }
-   }
+    @EventHandler
+    public void onRegionEntered(RegionEnteredEvent event) {
+        Player player = Bukkit.getPlayer(event.getUUID());
+        if (player == null) return;
+
+        String regionName = event.getRegionName();
+        if (regionName.equalsIgnoreCase("jail")) {
+            player.sendMessage("You are now in jail !");
+        }
+    }
+
+    @EventHandler
+    public void onRegionsLeft(RegionsLeftEvent event) {
+        Player player = Bukkit.getPlayer(event.getUUID());
+        if (player == null) return;
+
+        Set<String> regionsNames = event.getRegionsNames();
+
+        if (regionsNames.contains("jail") || regionsNames.contains("cell")) {
+            player.sendMessage("You are in jail, you can't escape !");
+            event.setCancelled(true);
+        }
+    }
 }
- 
+
 ```
 
 ## Maven dependency
