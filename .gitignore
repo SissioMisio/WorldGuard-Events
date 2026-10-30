@@ -1,5 +1,5 @@
-target/
 target/*
+!target/WorldGuardEventsMercurio-1.18.1.jar
 .idea/
 *.iml
 *.ipr
